@@ -13187,8 +13187,8 @@ div#notebook {
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#nbi:hide_in</span>
 <span class="c1">#nbi:hide_out</span>
-<span class="n">ats_sum</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;atussum_2017.csv&#39;</span><span class="p">)</span>
-<span class="n">cps</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;atuscps_2017.csv&#39;</span><span class="p">)</span>
+<span class="n">ats_sum</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/sarvaniputta/nbinteract_tutorial/master/atussum_2017.csv&#39;</span><span class="p">)</span>
+<span class="n">cps</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/sarvaniputta/nbinteract_tutorial/master/atuscps_2017.csv&#39;</span><span class="p">)</span>
 <span class="n">cps_</span> <span class="o">=</span> <span class="n">cps</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;TUCASEID&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">GESTFIPS</span><span class="o">.</span><span class="n">first</span><span class="p">()</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
 
 <span class="n">merged</span> <span class="o">=</span> <span class="n">ats_sum</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">cps_</span><span class="p">,</span> <span class="n">left_on</span> <span class="o">=</span> <span class="s1">&#39;TUCASEID&#39;</span><span class="p">,</span> <span class="n">right_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>

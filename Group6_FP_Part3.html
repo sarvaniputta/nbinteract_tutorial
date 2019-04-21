@@ -13084,7 +13084,7 @@ div#notebook {
 
 <!-- Loading mathjax macro -->
 <!-- Load mathjax -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
     <!-- MathJax configuration -->
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -13106,6 +13106,9 @@ div#notebook {
     <!-- End of mathjax configuration -->
 
 <style>
+		.container {
+			width: 75%;
+		}
         .cell.nbinteract-left {
             width: 50%;
             float: left;
@@ -13115,6 +13118,22 @@ div#notebook {
             width: 50%;
             float: right;
         }
+		
+		.cell.nbinteract-twentyfiveleft{
+			width: 23%;
+			display: inline-block;
+			vertical-align: top;
+		}
+		.cell.nbinteract-fifty{
+			width: 50%;
+			display: inline-block;
+			vertical-align: top;
+		}
+		.cell-nbinteract-twentyfiveright{
+			width: 25%;
+			display: inline-block;
+			vertical-align: top;
+			}
 
         .cell.nbinteract-hide_in > .input {
             display: none;
@@ -13131,7 +13150,7 @@ div#notebook {
         }
 
         div.output_subarea {
-            max-width: initial;
+            max-width: inherit;
         }
 
         .jp-OutputPrompt {
@@ -13261,7 +13280,7 @@ div#notebook {
                    <span class="c1"># reverse the colorscale or Hawaii is not visible</span>
 
 <span class="n">map_tt</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Tooltip</span><span class="p">(</span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;State&#39;</span><span class="p">,</span> <span class="s1">&#39;Time (minutes)&#39;</span><span class="p">],</span> <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;color&#39;</span><span class="p">])</span>
-<span class="n">sc_geo</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">AlbersUSA</span><span class="p">(</span><span class="n">scale_factor</span> <span class="o">=</span> <span class="mi">1650</span><span class="p">)</span>
+<span class="n">sc_geo</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">AlbersUSA</span><span class="p">(</span><span class="n">scale_factor</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
 <span class="n">states_map</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="n">work_statewise</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span> 
                      <span class="n">map_data</span><span class="o">=</span><span class="n">bq</span><span class="o">.</span><span class="n">topo_load</span><span class="p">(</span><span class="s1">&#39;map_data/USStatesMap.json&#39;</span><span class="p">),</span>
                     <span class="n">scales</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;projection&#39;</span><span class="p">:</span><span class="n">sc_geo</span><span class="p">,</span> <span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="n">cscale</span><span class="p">},</span><span class="n">tooltip</span> <span class="o">=</span> <span class="n">map_tt</span><span class="p">,</span>
@@ -13271,11 +13290,13 @@ div#notebook {
                     <span class="n">unselected_style</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;opacity&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">})</span>
 
 <span class="n">cax</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">ColorAxis</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">cscale</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Time(minutes)&#39;</span><span class="p">)</span>
-<span class="n">fig_map</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">marks</span><span class="o">=</span><span class="p">[</span><span class="n">states_map</span><span class="p">],</span><span class="n">axes</span><span class="o">=</span><span class="p">[</span><span class="n">cax</span><span class="p">],</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Average Working Time&#39;</span><span class="p">,</span>
+<span class="n">fig_map</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">marks</span><span class="o">=</span><span class="p">[</span><span class="n">states_map</span><span class="p">],</span><span class="n">axes</span><span class="o">=</span><span class="p">[</span><span class="n">cax</span><span class="p">],</span>
+<span class="c1">#                     title = &#39;Average Working Time&#39;,</span>
                    <span class="n">layout</span><span class="o">=</span><span class="n">Layout</span><span class="p">(</span><span class="n">min_width</span><span class="o">=</span><span class="s1">&#39;52em&#39;</span><span class="p">,</span> <span class="n">min_height</span><span class="o">=</span><span class="s1">&#39;50em&#39;</span><span class="p">),</span>
                    <span class="n">background_style</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fill&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">},</span>
-                    <span class="n">title_style</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;font-family&#39;</span><span class="p">:</span> <span class="s1">&#39;Montserrat&#39;</span><span class="p">,</span> <span class="s1">&#39;font-size&#39;</span><span class="p">:</span> <span class="s1">&#39;30px&#39;</span><span class="p">,</span>
-                                  <span class="s1">&#39;text-transform&#39;</span><span class="p">:</span> <span class="s1">&#39;uppercase&#39;</span><span class="p">,</span> <span class="s1">&#39;font-weight&#39;</span><span class="p">:</span> <span class="s1">&#39;700&#39;</span><span class="p">,</span> <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;#E84A27&#39;</span><span class="p">},)</span>
+<span class="c1">#                     title_style = {&#39;font-family&#39;: &#39;Montserrat&#39;, &#39;font-size&#39;: &#39;30px&#39;,</span>
+<span class="c1">#                                   &#39;text-transform&#39;: &#39;uppercase&#39;, &#39;font-weight&#39;: &#39;700&#39;, &#39;color&#39;: &#39;#E84A27&#39;},</span>
+                   <span class="p">)</span>
 <span class="n">fig_map</span><span class="o">.</span><span class="n">fig_margin</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bottom&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;top&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
 
 <span class="c1">###########################################################</span>
@@ -13356,7 +13377,7 @@ div#notebook {
     <span class="n">columns</span> <span class="o">=</span> <span class="n">activity_cols_dict</span><span class="p">[</span><span class="n">activity</span><span class="p">]</span>
     <span class="n">filtered</span> <span class="o">=</span> <span class="n">merged</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">merged</span><span class="o">.</span><span class="n">GESTFIPS</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
     <span class="n">states_map</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">filtered</span>
-    <span class="n">fig_map</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">act_dd</span><span class="o">.</span><span class="n">value</span>
+<span class="c1">#     fig_map.title = act_dd.value</span>
     <span class="c1"># For updating line plot</span>
     <span class="n">age_wise_act_sum</span> <span class="o">=</span> <span class="n">merged</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;TEAGE&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()[</span><span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">age_wise_count</span> <span class="o">=</span> <span class="n">merged</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;TEAGE&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()[</span><span class="s1">&#39;TUCASEID&#39;</span><span class="p">]</span>
@@ -13367,8 +13388,106 @@ div#notebook {
 <span class="n">act_dd</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">on_activity_change</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">)</span>
 
 <span class="c1">###########################################################</span>
+</pre></div>
 
-<span class="n">ipywidgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span><span class="n">act_dd</span><span class="p">,</span> <span class="n">ipywidgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">fig_map</span><span class="p">,</span> <span class="n">ipywidgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span><span class="n">fig_bar1</span><span class="p">,</span> <span class="n">fig_line</span><span class="p">])])])</span>
+    </div>
+</div>
+</div>
+
+  </div>
+
+  
+
+  <div class="nbinteract-hide_in nbinteract-twentyfiveleft
+      cell border-box-sizing code_cell rendered">
+    <div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#nbi:hide_in</span>
+<span class="c1">#nbi:twentyfiveleft</span>
+<span class="n">act_dd</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    
+
+
+
+  <div class="output_subarea output_widget_view ">
+    <button class="js-nbinteract-widget">
+      Loading widgets...
+    </button>
+  </div>
+
+</div>
+
+</div>
+</div>
+
+  </div>
+
+  
+
+  <div class="nbinteract-hide_in nbinteract-fifty
+      cell border-box-sizing code_cell rendered">
+    <div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ipywidgets.VBox([act_dd, ipywidgets.HBox([fig_map, ipywidgets.VBox([fig_bar1, fig_line])])])</span>
+<span class="c1">#nbi:hide_in</span>
+<span class="c1">#nbi:fifty</span>
+<span class="n">fig_map</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    
+
+
+
+  <div class="output_subarea output_widget_view ">
+    <button class="js-nbinteract-widget">
+      Loading widgets...
+    </button>
+  </div>
+
+</div>
+
+</div>
+</div>
+
+  </div>
+
+  
+
+  <div class="nbinteract-hide_in nbinteract-twentyfiveright
+      cell border-box-sizing code_cell rendered">
+    <div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#nbi:twentyfiveright</span>
+<span class="c1">#nbi:hide_in</span>
+<span class="n">ipywidgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span><span class="n">fig_bar1</span><span class="p">,</span> <span class="n">fig_line</span><span class="p">])</span>
 </pre></div>
 
     </div>
